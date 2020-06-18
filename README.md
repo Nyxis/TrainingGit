@@ -13,9 +13,9 @@ cd /var/git
 
 ## Et encore un autre
 
-
 git branch mykillerfeature
 git branch -f master master^ MASTER OF PUPPETS !
 git push origin master -f
 git push origin mykillerfeature
 
+Je rajoute un conflit ici
