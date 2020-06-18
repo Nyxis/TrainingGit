@@ -1,2 +1,2 @@
 # TrainingGit
-Dépot d'exemples pour le training Git Linkvalue
+Dépot d'exemples pour le training Git.
