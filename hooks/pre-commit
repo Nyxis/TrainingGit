@@ -1,0 +1,28 @@
+#!/bin/sh
+
+if [ ! -f bin/php-cs-fixer ]; then
+    exit 0;
+fi
+
+PROJECT=`php -r "echo dirname(dirname(dirname(realpath('$0'))));"`
+STAGED_FILES_CMD=`git diff --cached --name-only --diff-filter=ACMR HEAD | grep \\\\.php`
+
+# Determine if a file list is passed
+if [ "$#" -eq 1 ]
+then
+    oIFS=$IFS
+    IFS='
+    '
+    SFILES="$1"
+    IFS=$oIFS
+fi
+SFILES=${SFILES:-$STAGED_FILES_CMD}
+
+echo "Applying \033[1;32mphp-cs-fixer \033[0mon committed files..."
+for FILE in $SFILES
+do
+    php bin/php-cs-fixer fix $FILE -q
+    git add $FILE
+done
+
+exit 0
